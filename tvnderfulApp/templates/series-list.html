@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TVnderful</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ series_name }}</h1>
+    {{ series_summary | safe }}
+    <p><b>Network: </b>{{ series_network }}</p>
+    <p><b>Number of episodes: </b>{{ series_episode | length }}</p>
+
+    <table style="width: 100%">
+        <tr>
+            <th>Name</th>
+            <th>Season</th>
+            <th>Episode</th>
+            <th>Airdate</th>
+        </tr>
+        {% for episode in series_episode %}
+        <tr>
+            <td><a href="{% url 'episode_detail' episode.id %} ">{{ episode.name }}</a></td>
+            <td>{{ episode.season }}</td>
+            <td>{{ episode.number }}</td>
+            <td>{{ episode.airdate }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
