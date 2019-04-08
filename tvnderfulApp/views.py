@@ -47,11 +47,16 @@ def episode_detail(request, id):
     episode_airdate = response_dict['airdate']
     episode_summary = response_dict['summary']
 
-    if response_dict['image'] is None and episode_summary == '':
-        episode_image = ''
-        episode_summary = '<br>No summary'
+    print(response_dict['image'])
+
+    if response_dict['image'] is None:
+        episode_image = '#'
     else:
         episode_image = response_dict['image']['medium']
+
+    if episode_summary == '' or episode_summary is None:
+        episode_summary = '<br>No summary'
+
 
     return render(request, 'episode-detail.html',
                   {
