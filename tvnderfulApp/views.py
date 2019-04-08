@@ -1,18 +1,22 @@
 from django.shortcuts import render
 import requests
-from datetime import datetime
 
-def series_list(request):
-    url = 'http://api.tvmaze.com/singlesearch/shows?q=elementary&embed=episodes'
-    r = requests.get(url)
 
-    response_dict = r.json()
+def series_list(request, id):
+    # http://api.tvmaze.com/shows/1
+    show_url = 'http://api.tvmaze.com/shows/' + str(id)
+    episodes_url = 'http://api.tvmaze.com/shows/' + str(id) + '/episodes'
+    show_info = requests.get(show_url)
+    episodes_info = requests.get(episodes_url)
 
-    series_id = response_dict['id']
-    series_name = response_dict['name']
-    series_summary = response_dict['summary']
-    series_network = response_dict['network']['name']
-    series_episode = response_dict['_embedded']['episodes']
+    show_dict = show_info.json()
+    episodes_dict = episodes_info.json()
+
+    series_id = show_dict['id']
+    series_name = show_dict['name']
+    series_summary = show_dict['summary']
+    series_network = show_dict['network']['name']
+    series_episode = episodes_dict
 
     return render(request, 'series-list.html',
                   {
@@ -47,3 +51,11 @@ def episode_detail(request, id):
                       'episode_summary': episode_summary,
                       'episode_image': episode_image
                   })
+
+def show_index(request):
+    url = 'http://api.tvmaze.com/shows'
+    r = requests.get(url)
+
+    shows = r.json()
+
+    return render(request, 'show-index.html', {'shows': shows})

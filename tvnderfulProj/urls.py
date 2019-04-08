@@ -19,5 +19,5 @@ from tvnderfulApp import urls as series_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tvnderful/', include(series_urls)),
+    path('', include(series_urls)),
 ]

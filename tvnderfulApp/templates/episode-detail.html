@@ -1,16 +1,19 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ episode_name }}</title>
-</head>
-<body>
-    <h1>{{ episode_name }} ({{ episode_season }}x{{ episode_number}})</h1>
-    <img src="{{ episode_image }}" alt="{{ episode_name }}">
-    <p>{{ episode_airdate }}</p>
-    {{ episode_summary | safe }}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %} {{ episode_name }} {% endblock %}
+
+{% block main %}
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ episode_name }} ({{ episode_season }}x{{ episode_number}})</h2>
+        </div>
+        <div class="card-body">
+            <div>
+               <img src="{{ episode_image }}" alt="{{ episode_name }}">
+            </div>
+            <p><b>Airdate: </b><p>{{ episode_airdate }}</p></p>
+            <span><b>Summary:</b>{{ episode_summary | safe }}</span>
+
+        </div>
+    </div>
+{% endblock %}
