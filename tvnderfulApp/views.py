@@ -40,7 +40,12 @@ def episode_detail(request, id):
     episode_number = response_dict['number']
     episode_airdate = response_dict['airdate']
     episode_summary = response_dict['summary']
-    episode_image = response_dict['image']['medium']
+
+    if response_dict['image'] is None and episode_summary == '':
+        episode_image = ''
+        episode_summary = '<br>No summary'
+    else:
+        episode_image = response_dict['image']['medium']
 
     return render(request, 'episode-detail.html',
                   {
@@ -51,6 +56,7 @@ def episode_detail(request, id):
                       'episode_summary': episode_summary,
                       'episode_image': episode_image
                   })
+
 
 def show_index(request):
     url = 'http://api.tvmaze.com/shows'
