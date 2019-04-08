@@ -18,6 +18,11 @@ def series_list(request, id):
     series_network = show_dict['network']['name']
     series_episode = episodes_dict
 
+    if show_dict['image'] is None:
+        show_image = ''
+    else:
+        show_image = show_dict['image']['medium']
+
     return render(request, 'series-list.html',
                   {
                       'series_id': series_id,
@@ -25,6 +30,7 @@ def series_list(request, id):
                       'series_summary': series_summary,
                       'series_network': series_network,
                       'series_episode': series_episode,
+                      'show_image': show_image
                   })
 
 

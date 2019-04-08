@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %} TVnderful {% endblock %}
+{% block title %} {{ series_name }} | TVnderful {% endblock %}
 
 {% block main %}
     <h1>{{ series_name }}</h1>
     <hr>
-    {{ series_summary | safe }}
-    <p><b>Network: </b>{{ series_network }}</p>
-    <p><b>Number of episodes: </b>{{ series_episode | length }}</p>
+
+    <div class="media">
+        <img src="{{show_image}}" class="mr-3 mb-3" alt="{{ series_name }}">
+        <div class="media-body">
+            {{ series_summary | safe }}
+            <p><b>Network: </b>{{ series_network }}</p>
+            <p><b>Number of episodes: </b>{{ series_episode | length }}</p>
+        </div>
+    </div>
 
     <table class="table table-striped">
         <tr>

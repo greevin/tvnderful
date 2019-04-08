@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ episode_name }} {% endblock %}
+{% block title %} {{ episode_name }} | TVnderful {% endblock %}
 
 {% block main %}
     <div class="card">
@@ -8,12 +8,13 @@
             <h2>{{ episode_name }} ({{ episode_season }}x{{ episode_number}})</h2>
         </div>
         <div class="card-body">
-            <div>
-               <img src="{{ episode_image }}" alt="{{ episode_name }}">
+            <div class="media">
+                <img src="{{ episode_image }}" class="mr-3 mb-3" alt="{{ episode_name }}">
+                <div class="media-body">
+                    <span><b>Airdate: </b><p>{{ episode_airdate }}</p></span>
+                    <span><b>Summary:</b>{{ episode_summary | safe }}</span>
+                </div>
             </div>
-            <p><b>Airdate: </b><p>{{ episode_airdate }}</p></p>
-            <span><b>Summary:</b>{{ episode_summary | safe }}</span>
-
         </div>
     </div>
 {% endblock %}
